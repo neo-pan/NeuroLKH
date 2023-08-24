@@ -17,7 +17,7 @@ def run(n_nodes, file_dir="train"):
         n_samples = 1000
     else:
         assert file_dir == "train"
-        n_samples = (20 * 200 // n_nodes) * 125
+        n_samples = (20 * 200 // n_nodes) * 1
     n_neighbours = 20
 
     x = np.random.uniform(size=[n_samples, n_nodes, 2])
