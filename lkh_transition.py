@@ -166,22 +166,36 @@ class LKHTransition:
             metrics = np.array(metrics)
             new_candidates = []
             new_solutions = []
-            for i in range(batch_size):
-                instance_name = str(i)
-                new_candidates.append(
-                    read_candidates(
-                        "result/"
-                        + dataset_name
-                        + "/candidate/"
-                        + instance_name
-                        + ".txt"
+            with Pool(processes) as pool:
+                for i in range(batch_size):
+                    instance_name = str(i)
+                    new_candidates.append(
+                        pool.apply_async(
+                            read_candidates,
+                            (
+                                "result/"
+                                + dataset_name
+                                + "/candidate/"
+                                + instance_name
+                                + ".txt",
+                            ),
+                        )
                     )
-                )
-                new_solutions.append(
-                    read_tour(
-                        "result/" + dataset_name + "/tour/" + instance_name + ".tour"
-                    ).squeeze()
-                )
+                    new_solutions.append(
+                        pool.apply_async(
+                            read_tour,
+                            (
+                                "result/"
+                                + dataset_name
+                                + "/tour/"
+                                + instance_name
+                                + ".tour",
+                            ),
+                        )
+                    )
+                new_candidates = [c.get() for c in new_candidates]
+                new_solutions = [s.get().squeeze() for s in new_solutions]
+
             new_candidates = new_candidates
             new_solutions = np.stack(new_solutions)
         return (instances, new_solutions, new_candidates, pi), metrics
