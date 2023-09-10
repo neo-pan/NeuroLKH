@@ -20,6 +20,7 @@ int featureGenerate(int r_seed, double* invec, int n)
     MaxCandidates = 20;
 
     n_nodes = n / 60;
+
     ReadProblem(invec);
     GeneratingFeatures = 1;
     NeuroLKH = 0;
@@ -54,5 +55,23 @@ int featureGenerate(int r_seed, double* invec, int n)
 	    NN += 1;
         }
     }
+    ChooseInitialTour();
+    RecordBetterTour();
+
     return (int) ((GetTime() - StartTime) * 1000000);
+}
+
+void OutputBetterTour(int *invec, int n)
+{
+    int i;
+    if (n == DimensionSaved)
+    {
+        for (i = 0; i < n; i++) {
+            invec[i] = BetterTour[i];
+        }
+    }
+    else
+    {
+        printff("Error: DimensionSaved != %d\n", n);
+    }
 }

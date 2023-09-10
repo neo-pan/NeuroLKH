@@ -1,4 +1,19 @@
 import os
+import sys
+
+# Get the absolute path of the current script
+current_script_path = os.path.abspath(__file__)
+
+# Get the directory containing the current script
+neurolkh_directory = os.path.dirname(current_script_path)
+# Determine the parent directory (NeuroLKH folder) by going up one level
+# neurolkh_directory = os.path.abspath(os.path.join(current_script_directory, ".."))
+
+# Add the parent directory to sys.path
+sys.path.append(neurolkh_directory)
+sys.path.append(os.path.join(neurolkh_directory, "net"))
+
+import os
 from subprocess import check_call
 from multiprocessing import Pool
 import tqdm

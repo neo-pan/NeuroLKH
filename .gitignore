@@ -1,9 +1,14 @@
 **/__pycache__/
 **/build/
+.vscode/
 concorde_tmpfiles/
 train/
 val/
 test/
 result/
 OBJ/
+
 LKH
+SRC_swig/LKH.py
+SRC_swig/LKH_wrap.c
+SRC_swig/_LKH.cpython-311-x86_64-linux-gnu.so

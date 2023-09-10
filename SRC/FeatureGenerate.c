@@ -53,5 +53,12 @@ int featureGenerate(void)
         fprintf(FeatFile, "\n");
     }
     fprintf(FeatFile, "%f\n", GetTime() - StartTime);
+    fclose(FeatFile);
+    printff ("ChooseInitialTour\n");
+    ChooseInitialTour();
+    RecordBetterTour();
+    RecordBestTour();
+    printff ("WriteTour Feat\n");
+    WriteTour(TourFileName, BestTour, BestCost);
     return EXIT_SUCCESS;
 }

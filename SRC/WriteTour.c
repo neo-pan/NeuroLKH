@@ -20,10 +20,12 @@ void WriteTour(char *FileName, int *Tour, GainType Cost)
 
     if (CurrentPenalty != 0 && MTSPObjective == -1 &&
         ProblemType != CCVRP && ProblemType != TRP &&
-        ProblemType != MLP)
+        ProblemType != MLP) {
         return;
-    if (FileName == 0)
+        }
+    if (FileName == 0){ 
         return;
+    }
     FullFileName = FullName(FileName, Cost);
     Now = time(&Now);
     if (TraceLevel >= 1)
@@ -47,7 +49,6 @@ void WriteTour(char *FileName, int *Tour, GainType Cost)
     fprintf(TourFile, "TYPE : TOUR\n");
     fprintf(TourFile, "DIMENSION : %d\n", DimensionSaved);
     fprintf(TourFile, "TOUR_SECTION\n");
-
     n = DimensionSaved;
     for (i = 1; Tour[i] != MTSPDepot; i++);
     Forward = Asymmetric ||

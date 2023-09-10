@@ -2,7 +2,7 @@ import torch
 import torch.nn.functional as F
 import torch.nn as nn
 
-from net.sgcn_layers import SparseGCNLayer, MLP
+from sgcn_layers import SparseGCNLayer, MLP
 
 def loss_edges(y_pred_edges, y_edges, edge_cw):
     y_pred_edges = y_pred_edges.permute(0, 2, 1)  # batch_size x 2 x n_node * n_edge
